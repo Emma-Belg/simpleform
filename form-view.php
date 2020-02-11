@@ -50,7 +50,8 @@
                     <?php
                     getStNumber()
                     ?>
-                    <input type="text" id="streetnumber" name="streetnumber" class="form-control">
+                    <input type="text" id="streetnumber" name="streetnumber" value="<?php echo $streetNumberOutput[1]; ?>" class="form-control">
+                    <?php echo $streetNumberOutput[0]; ?>
                 </div>
             </div>
             <div class="form-row">
@@ -66,7 +67,8 @@
                     <?php
                     getZip()
                         ?>
-                    <input type="text" id="zipcode" name="zipcode" value="<?php echo $zipcode ?>" class="form-control">
+                    <input type="text" id="zipcode" name="zipcode" value="<?php echo $zipOutput[1]; ?>" class="form-control">
+                    <?php echo $zipOutput[0]; ?>
                 </div>
             </div>
         </fieldset>

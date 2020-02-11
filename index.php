@@ -59,51 +59,69 @@ function getStreet()
 }
 
 //$city = "";
-function getCity()
-{
+function getCity(){
+    $city = $_POST['city'];
+    $cityArr = array();
     if (isset($_POST['city']) == true && empty($_POST['city']) == false) {
-        $city = trim($_POST['city']);
         if (empty($city)) {
-            echo '<html lang="en"><div class="alert alert-danger">input required</div>';
+            $enterData = '<div class="alert alert-danger">input required</div>';
+            $citySession = $_SESSION['city'] = $city;
+            array_push($cityArr, $enterData, $citySession);
         } else {
-            echo'<html lang="en"><div class="alert alert-success">thank you</div>';
+            $thankyou = '<div class="alert alert-success">thank you</div>';
+            array_push($cityArr, $thankyou);
         }
+        return $cityArr;
     }
 }
 
 
 function getStNumber() {
+    $streetnumber = $_POST["streetnumber"];
+    $streetNumberArr = array();
     if (isset($_POST["streetnumber"])) {
-        $streetnumber = $_POST["streetnumber"];
         if (empty($_POST["streetnumber"])) {
-            echo "  Please enter data";
+            $enterData = "  Please enter data";
+            array_push($streetNumberArr, $enterData);
         }
-        elseif (is_numeric($streetnumber) == true) {
-           echo '<html lang="en"><div class="alert alert-success">valid number</div>';
-           $_SESSION["streetnumber"] = $streetnumber;
+        else if (is_numeric($streetnumber) == true) {
+            $valid ='<html lang="en"><div class="alert alert-success">valid number</div>';
+            $streetNumberSession = $_SESSION['streetnumber'] = $streetnumber;
+            array_push($streetNumberArr, $valid, $streetNumberSession);
         } else {
-            echo'<html lang="en"><div class="alert alert-danger">please enter only valid numbers</div>';
+            $askForValid = '<html lang="en"><div class="alert alert-danger">please enter only valid numbers</div>';
+            array_push($streetNumberArr, $askForValid);
         }
+        return $streetNumberArr;
     }
 }
+
+$streetNumberOutput = getStNumber();
+
 
 function getZip() {
     $zipcode = /*htmlspecialchars(*/$_POST["zipcode"];
-
+    $zipArr = array();
     if (isset($zipcode)) {
         if (empty($_POST["zipcode"])) {
-            echo "  Please enter data";
+            $enterData = "  Please enter data";
+            array_push($zipArr, $enterData);
         }
-        elseif (is_numeric($_POST["zipcode"]) == true) {
-            echo '<html lang="en"><div class="alert alert-success">valid number</div>';
-            $_SESSION['zipcodee'] = $zipcode;
+        else if (is_numeric($_POST["zipcode"]) == true) {
+            $valid = '<html lang="en"><div class="alert alert-success">valid number</div>';
+            $zipSession = $_SESSION['zipcodee'] = $zipcode;
+            array_push($zipArr, $valid, $zipSession);
         } else {
-            echo'<html lang="en"><div class="alert alert-danger">please enter only valid numbers</div>';
+            $askForValid = '<html lang="en"><div class="alert alert-danger">please enter only valid numbers</div>';
+            array_push($zipArr, $askForValid);
         }
+        //implode("", $zipArr);
+        return $zipArr;
     }
-    return $zipcode;
 }
 
+$zipOutput = getzip();
+//var_dump($zipArr);
 
 
 //NOTE from Sicco
@@ -125,7 +143,7 @@ function whatIsHappening()
     var_dump($_SESSION);
 }
 
-whatIsHappening();
+//whatIsHappening();
 
 //your products with their price.
 $products = [
