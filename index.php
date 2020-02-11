@@ -2,6 +2,10 @@
 //this line makes PHP behave in a more strict way
 declare(strict_types=1);
 
+/*ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);*/
+
 //we are going to use session variables so we need to enable sessions
 session_start();
 
@@ -46,17 +50,23 @@ if (isset($_POST['email']) == true && empty($_POST['email']) == false) {
 }
 
 //$street = "";
-function getStreet()
-{
+function getStreet(){
+    $street = $_POST['street'];
+    $streetArr = array();
     if (isset($_POST['street']) == true && empty($_POST['street']) == false) {
-        $street = trim($_POST['street']);
         if (empty($street)) {
-            echo '<html lang="en"><div class="alert alert-danger">input required</div>';
+            $enterData = '<html lang="en"><div class="alert alert-danger">input required</div>';
+            array_push($cityArr, $enterData);
         } else {
-            echo'<html lang="en"><div class="alert alert-success">thank you</div>';
+            $thankyou = '<html lang="en"><div class="alert alert-success">thank you</div>';
+            $citySession = $_SESSION['street'] = $street;
+            array_push($streetArr, $thankyou, $citySession);
         }
+        return $streetArr;
     }
 }
+//get the the return value of the function and putting it into a new var so that it can be used in the HTML
+$streetOutput = getStreet();
 
 //$city = "";
 function getCity(){
@@ -65,15 +75,16 @@ function getCity(){
     if (isset($_POST['city']) == true && empty($_POST['city']) == false) {
         if (empty($city)) {
             $enterData = '<div class="alert alert-danger">input required</div>';
-            $citySession = $_SESSION['city'] = $city;
-            array_push($cityArr, $enterData, $citySession);
+            array_push($cityArr, $enterData);
         } else {
             $thankyou = '<div class="alert alert-success">thank you</div>';
-            array_push($cityArr, $thankyou);
+            $citySession = $_SESSION['city'] = $city;
+            array_push($cityArr, $thankyou, $citySession);
         }
         return $cityArr;
     }
 }
+$cityOutput = getCity();
 
 
 function getStNumber() {

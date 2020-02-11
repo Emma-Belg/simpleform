@@ -43,7 +43,8 @@
                     <?php
                     getStreet()
                     ?>
-                    <input type="text" name="street" id="street" class="form-control"/>
+                    <input type="text" name="street" id="street" value="<?php echo $streetOutput[1]; ?>" class="form-control"/>
+                    <?php echo $streetOutput[0]; ?>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="streetnumber">Street number:</label>
@@ -60,7 +61,8 @@
                     <?php
                     getCity()
                         ?>
-                    <input type="text" id="city" name="city" class="form-control">
+                    <input type="text" id="city" name="city" value="<?php echo $cityOutput[1]; ?>" class="form-control">
+                    <?php echo $cityOutput[0]; ?>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="zipcode">Zipcode</label>
