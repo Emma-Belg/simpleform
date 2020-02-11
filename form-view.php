@@ -66,7 +66,7 @@
                     <?php
                     getZip()
                         ?>
-                    <input type="text" id="zipcode" name="zipcode" value="<?php $zipcode ?>" class="form-control">
+                    <input type="text" id="zipcode" name="zipcode" value="<?php echo $zipcode ?>" class="form-control">
                 </div>
             </div>
         </fieldset>

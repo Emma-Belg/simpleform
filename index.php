@@ -75,8 +75,12 @@ function getCity()
 function getStNumber() {
     if (isset($_POST["streetnumber"])) {
         $streetnumber = $_POST["streetnumber"];
-        if (is_numeric($streetnumber) == true) {
+        if (empty($_POST["streetnumber"])) {
+            echo "  Please enter data";
+        }
+        elseif (is_numeric($streetnumber) == true) {
            echo '<html lang="en"><div class="alert alert-success">valid number</div>';
+           $_SESSION["streetnumber"] = $streetnumber;
         } else {
             echo'<html lang="en"><div class="alert alert-danger">please enter only valid numbers</div>';
         }
@@ -84,21 +88,29 @@ function getStNumber() {
 }
 
 function getZip() {
-    $zipcode = htmlspecialchars($_POST["zipcode"]);
-    $cookieName = "zipcode";
-    $cookieValue = $zipcode;
-    setcookie($cookieName, $cookieValue, time() + (600));
-    if (isset($_COOKIE[$cookieName])) {
-        //$zipcode = $_POST["zipcode"];
-        $zipcode = $_COOKIE[$cookieName];
-        if (is_numeric($zipcode) == true) {
+    $zipcode = /*htmlspecialchars(*/$_POST["zipcode"];
+
+    if (isset($zipcode)) {
+        if (empty($_POST["zipcode"])) {
+            echo "  Please enter data";
+        }
+        elseif (is_numeric($_POST["zipcode"]) == true) {
             echo '<html lang="en"><div class="alert alert-success">valid number</div>';
+            $_SESSION['zipcodee'] = $zipcode;
         } else {
             echo'<html lang="en"><div class="alert alert-danger">please enter only valid numbers</div>';
         }
     }
+    return $zipcode;
 }
 
+
+
+//NOTE from Sicco
+//This is to set the cookie value
+$_SESSION['whateveryouwant'] = 'codings awseomeeee';
+//This is to read/get the cookie value
+$whatisinthesession = $_SESSION['whateveryouwant'] ;
 
 
 function whatIsHappening()
@@ -113,7 +125,7 @@ function whatIsHappening()
     var_dump($_SESSION);
 }
 
-//whatIsHappening();
+whatIsHappening();
 
 //your products with their price.
 $products = [
