@@ -215,22 +215,6 @@ $drinks = [
     ['name' => 'Ice-tea', 'price' => 3],
 ];
 
-if (!empty($_POST["products"])) {
-    $productOrders = $_POST["products"];
-    $totalPrice = array();
-
-    foreach ($productOrders as $key => $amount) {
-        $prodPrice = $products[$key]['price'];
-        $ThenPrice = $prodPrice * $amount;
-        array_push($totalPrice, $ThenPrice);
-    }
-    $total = array_sum($totalPrice);
-    $totalValue = $total;
-} else {
-    $totalValue = 0;
-}
-
-
 if (!isset($_GET["food"])) {
     $_GET["food"] = 1;
 }
@@ -239,5 +223,34 @@ if ($_GET["food"] == 1) {
 } else {
     $products = $drinks;
 }
+
+
+/*function thePrice() {*/
+    if (!empty($_POST["products"])) {
+        $productOrders = $_POST["products"];
+        $totalPrice = array();
+
+        foreach ($productOrders as $key => $amount) {
+            $prodPrice = $products[$key]['price'];
+            $addingPrice = $prodPrice * $amount;
+            array_push($totalPrice, $addingPrice);
+        }
+        $total = array_sum($totalPrice);
+        $totalValue = $total;
+        setcookie ("priceCookie", strval($totalValue), /*time() + (6000)*/);
+         if(!isset($_COOKIE["priceCookie"])) {
+             $newValue = $totalValue + $_COOKIE["priceCookie"];
+             setcookie ("secondCookie", strval($totalValue + $_COOKIE["priceCookie"]));
+        }
+         //echo $newValue;
+         echo $_COOKIE["priceCookie"];
+    } else {
+        $totalValue = 0;
+    }
+/*    return $totalValue;
+}*/
+
+
+
 
 require 'form-view.php';
