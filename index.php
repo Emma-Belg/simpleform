@@ -36,131 +36,145 @@ function getStreetCity($field)
 //running several functions inside an if (we are checking if there is any information in the POST)
 //if (isset($_POST)) {
 
-    function getEmail() {
-        $email = $_POST['email'];
-        $emailArr = array();
-        if (isset($_POST['email']) == true && empty($_POST['email']) == false) {
-            if (empty($_POST['email'])){
-                $enterData = "  Please enter data";
-                $_POST['email'] = "";
-                array_push($emailArr, $enterData);
-            }
-            else if (filter_var($email, FILTER_VALIDATE_EMAIL) == true) {
-                $valid = '<div class="alert alert-success">thank you</div>';
-                $emailSession = $_SESSION['email'] = $email;
-                array_push($emailArr, $valid, $emailSession);
-            } else {
-                $askForValid = '<div class="alert alert-danger">invalid email format</div>';
-                $_POST['email'] = "";
-                array_push($emailArr, $askForValid);
-            }
-        }
-        return $emailArr;
-    }
-    $emailOutput = getEmail();
-
-
-    function getStreet()
-    {
-        $street = $_POST['street'];
-        $streetArr = array();
-        if (isset($_POST['street']) == true && empty($_POST['street']) == false) {
-            if (empty($street)) {
-                $enterData = '<div class="alert alert-danger">input required</div>';
-                $_POST['street'] = "";
-                array_push($cityArr, $enterData);
-            } else {
-                $thankyou = '<div class="alert alert-success">thank you</div>';
-                $streetSession = $_SESSION['street'] = $street;
-                array_push($streetArr, $thankyou, $streetSession);
-            }
-            return $streetArr;
+function getEmail()
+{
+    $email = $_POST['email'];
+    $emailArr = array();
+    if (isset($_POST['email']) == true && empty($_POST['email']) == false) {
+        if (empty($_POST['email'])) {
+            $enterData = "  Please enter data";
+            $_POST['email'] = "";
+            array_push($emailArr, $enterData);
+        } else if (filter_var($email, FILTER_VALIDATE_EMAIL) == true) {
+            $valid = '<div class="alert alert-success">thank you</div>';
+            $emailSession = $_SESSION['email'] = $email;
+            array_push($emailArr, $valid, $emailSession);
+        } else {
+            $askForValid = '<div class="alert alert-danger">invalid email format</div>';
+            $_POST['email'] = "";
+            array_push($emailArr, $askForValid);
         }
     }
+    return $emailArr;
+}
+
+$emailOutput = getEmail();
+
+
+function getStreet()
+{
+    $street = $_POST['street'];
+    $streetArr = array();
+    if (isset($_POST['street']) == true && empty($_POST['street']) == false) {
+        if (empty($street)) {
+            $enterData = '<div class="alert alert-danger">input required</div>';
+            $_POST['street'] = "";
+            array_push($cityArr, $enterData);
+        } else {
+            $thankyou = '<div class="alert alert-success">thank you</div>';
+            $streetSession = $_SESSION['street'] = $street;
+            array_push($streetArr, $thankyou, $streetSession);
+        }
+        return $streetArr;
+    }
+}
 
 //get the the return value of the function and putting it into a new var so that it can be used in the HTML
-    $streetOutput = getStreet();
+$streetOutput = getStreet();
 
 //$city = "";
-    function getCity()
-    {
-        $city = $_POST['city'];
-        $cityArr = array();
-        if (isset($_POST['city']) == true && empty($_POST['city']) == false) {
-            if (empty($city)) {
-                $enterData = '<div class="alert alert-danger">input required</div>';
-                $_POST['city'] = "";
-                array_push($cityArr, $enterData);
-            } else {
-                $thankyou = '<div class="alert alert-success">thank you</div>';
-                $citySession = $_SESSION['city'] = $city;
-                array_push($cityArr, $thankyou, $citySession);
-            }
-            return $cityArr;
+function getCity()
+{
+    $city = $_POST['city'];
+    $cityArr = array();
+    if (isset($_POST['city']) == true && empty($_POST['city']) == false) {
+        if (empty($city)) {
+            $enterData = '<div class="alert alert-danger">input required</div>';
+            $_POST['city'] = "";
+            array_push($cityArr, $enterData);
+        } else {
+            $thankyou = '<div class="alert alert-success">thank you</div>';
+            $citySession = $_SESSION['city'] = $city;
+            array_push($cityArr, $thankyou, $citySession);
         }
+        return $cityArr;
     }
+}
 
-    $cityOutput = getCity();
+$cityOutput = getCity();
 
 
-    function getStNumber()
-    {
-        $streetnumber = $_POST["streetnumber"];
-        $streetNumberArr = array();
-        if (isset($_POST["streetnumber"])) {
-            if (empty($_POST["streetnumber"])) {
-                $enterData = "  Please enter data";
-                $_POST["streetnumber"] = "";
-                array_push($streetNumberArr, $enterData);
-            } else if (is_numeric($streetnumber) == true) {
-                $valid = '<html lang="en"><div class="alert alert-success">valid number</div>';
-                $streetNumberSession = $_SESSION['streetnumber'] = $streetnumber;
-                array_push($streetNumberArr, $valid, $streetNumberSession);
-            } else {
-                $askForValid = '<html lang="en"><div class="alert alert-danger">please enter only valid numbers</div>';
-                $_POST["streetnumber"] = "";
-                array_push($streetNumberArr, $askForValid);
-            }
-            return $streetNumberArr;
+function getStNumber()
+{
+    $streetnumber = $_POST["streetnumber"];
+    $streetNumberArr = array();
+    if (isset($_POST["streetnumber"])) {
+        if (empty($_POST["streetnumber"])) {
+            $enterData = "  Please enter data";
+            $_POST["streetnumber"] = "";
+            array_push($streetNumberArr, $enterData);
+        } else if (is_numeric($streetnumber) == true) {
+            $valid = '<html lang="en"><div class="alert alert-success">valid number</div>';
+            $streetNumberSession = $_SESSION['streetnumber'] = $streetnumber;
+            array_push($streetNumberArr, $valid, $streetNumberSession);
+        } else {
+            $askForValid = '<html lang="en"><div class="alert alert-danger">please enter only valid numbers</div>';
+            $_POST["streetnumber"] = "";
+            array_push($streetNumberArr, $askForValid);
         }
+        return $streetNumberArr;
     }
-    $streetNumberOutput = getStNumber();
+}
 
-    function getZip()
-    {
-        $zipcode = /*htmlspecialchars(*/$_POST["zipcode"];
-        $zipArr = array();
-        if (isset($zipcode)) {
-            if (empty($_POST["zipcode"])) {
-                $enterData = "  Please enter data";
-                $_POST["zipcode"] = "";
-                array_push($zipArr, $enterData);
-            } else if (is_numeric($_POST["zipcode"]) == true) {
-                $valid = '<div class="alert alert-success">valid number</div>';
-                $zipSession = $_SESSION['zipcodee'] = $zipcode;
-                array_push($zipArr, $valid, $zipSession);
-            } else {
-                $askForValid = '<div class="alert alert-danger">please enter only valid numbers</div>';
-                $_POST["zipcode"] = "";
-                array_push($zipArr, $askForValid);
-            }
-            return $zipArr;
+$streetNumberOutput = getStNumber();
+
+function getZip()
+{
+    $zipcode = /*htmlspecialchars(*/
+        $_POST["zipcode"];
+    $zipArr = array();
+    if (isset($zipcode)) {
+        if (empty($_POST["zipcode"])) {
+            $enterData = "  Please enter data";
+            $_POST["zipcode"] = "";
+            array_push($zipArr, $enterData);
+        } else if (is_numeric($_POST["zipcode"]) == true) {
+            $valid = '<div class="alert alert-success">valid number</div>';
+            $zipSession = $_SESSION['zipcodee'] = $zipcode;
+            array_push($zipArr, $valid, $zipSession);
+        } else {
+            $askForValid = '<div class="alert alert-danger">please enter only valid numbers</div>';
+            $_POST["zipcode"] = "";
+            array_push($zipArr, $askForValid);
         }
+        return $zipArr;
     }
-    $zipOutput = getzip();
+}
+
+$zipOutput = getzip();
 //}
 
-function correctOrder(){
-    if (isset($_POST['email']) && isset($_POST['street']) && isset($_POST['streetnumber']) && isset($_POST['city']) && isset($_POST["zipcode"])){
-        $correctOrder = '<div class="alert alert-success">Your order is being processed</div>';
+function correctOrder()
+{
+    if (!empty($_POST['email']) && !empty($_POST['street']) && !empty($_POST['streetnumber']) && !empty($_POST['city']) && !empty($_POST["zipcode"])) {
+        $order = '<div class="alert alert-success">Your order is being processed</div>';
     }
-    return $correctOrder;
+    else {
+        $order = '<div class="alert alert-danger">please complete the form</div>';
+    }
+    return $order;
 }
 
 
-/*foreach (){
 
-}*/
+if(isset($_POST['order']))
+{
+    $date_clicked = date('H:i');
+    $normalDelivery = $date_clicked + strtotime('+ 2 hours');
+    $expressDelivery = $date_clicked + strtotime('+ 45 minutes');
+    echo "Your order should arrive by " . $date_clicked ." on ".date('d-m-Y')."<br>";
+}
+
 
 /*//NOTE from Sicco
 //This is to set the cookie value
@@ -181,26 +195,10 @@ function whatIsHappening()
     var_dump($_SESSION);
 }
 
-//whatIsHappening();
-
-
-function toggleProducts($products) {
-    $productsArr = array();
-    foreach ($products AS $i => $product): {
-        $input = '<label><input type="checkbox" value="1" name="products['.$i.']/>';
-        $productName = $product."['name'] -";
-        $productPrice = "&euro;".number_format($product['price'], 2)."</label><br />";
-    }
-    array_push($productsArr, $input, $productName, $productPrice);
-    return $productsArr;
-}
-
-toggleProducts($sandwiches);
-toggleProducts($drinks);
-
+whatIsHappening();
 
 //your products with their price.
-$sandwiches = [
+$products = [
     ['name' => 'Club Ham', 'price' => 3.20],
     ['name' => 'Club Cheese', 'price' => 3],
     ['name' => 'Club Cheese & Ham', 'price' => 4],
@@ -216,5 +214,14 @@ $drinks = [
 ];
 
 $totalValue = 0;
+
+if (!isset($_GET["food"])){
+    $_GET["food"] = 1;
+}
+if ($_GET["food"] == 1) {
+    $products = $products;
+} else {
+    $products = $drinks;
+}
 
 require 'form-view.php';

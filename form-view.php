@@ -82,12 +82,8 @@
                     &euro; <?php echo number_format($product['price'], 2) ?></label><br />
             <?php endforeach; ?>
         </fieldset>
-        <?php
-        toggleProducts($sandwiches);
-        toggleProducts($drinks);
-        ?>
 
-        <button type="submit" class="btn btn-primary">Order!</button>
+        <button name = "order" type="submit" class="btn btn-primary">Order!</button>
     </form>
 
     <footer>You already ordered <strong>&euro; <?php echo $totalValue ?></strong> in food and drinks.</footer>
