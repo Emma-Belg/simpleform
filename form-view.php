@@ -25,7 +25,7 @@
     <form method="post">
         <div class="form-row">
             <div class="form-group col-md-6">
-                <?php echo correctOrder() ?>
+                <?php echo correctOrder(), orderButtons()?>
                 <label for="email">E-mail:</label>
                 <input type="text" id="email" name="email" value="<?php echo $emailOutput[1]; ?>"class="form-control"/>
                 <?php echo $emailOutput[0]; ?>
@@ -84,6 +84,7 @@
         </fieldset>
 
         <button name = "order" type="submit" class="btn btn-primary">Order!</button>
+        <button name = "expressOrder" type="submit" class="btn btn-primary">ExpressDelivery!</button>
     </form>
 
     <footer>You already ordered <strong>&euro; <?php echo $totalValue ?></strong> in food and drinks.</footer>

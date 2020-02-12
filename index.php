@@ -165,15 +165,18 @@ function correctOrder()
     return $order;
 }
 
-
-
-if(isset($_POST['order']))
-{
-    $date_clicked = date('H:i');
-    $normalDelivery = $date_clicked + strtotime('+ 2 hours');
-    $expressDelivery = $date_clicked + strtotime('+ 45 minutes');
-    echo "Your order should arrive by " . $date_clicked ." on ".date('d-m-Y')."<br>";
+function orderButtons(){
+    if (isset($_POST['order'])) {
+        $normalDelivery = date('h:i:s A', strtotime('+ 2 hours'));
+        $deliveryStatement = '<div class="alert alert-success">'."Your order should arrive by " . $normalDelivery . "<br></div>";
+    }
+    if (isset($_POST['expressOrder'])) {
+        $expressDelivery = date('h:i:s A', strtotime('+ 45 minutes'));
+        $deliveryStatement = '<div class="alert alert-success">'."Your order should arrive by " . $expressDelivery. "<br></div>";
+    }
+    return $deliveryStatement;
 }
+
 
 
 /*//NOTE from Sicco
