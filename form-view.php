@@ -25,11 +25,10 @@
     <form method="post">
         <div class="form-row">
             <div class="form-group col-md-6">
+                <?php echo correctOrder() ?>
                 <label for="email">E-mail:</label>
-                <input type="text" id="email" name="email" class="form-control"/>
-                <p><?php
-                    //echo $emailErr;
-                    ?></p>
+                <input type="text" id="email" name="email" value="<?php echo $emailOutput[1]; ?>"class="form-control"/>
+                <?php echo $emailOutput[0]; ?>
             </div>
             <div></div>
         </div>
@@ -83,6 +82,10 @@
                     &euro; <?php echo number_format($product['price'], 2) ?></label><br />
             <?php endforeach; ?>
         </fieldset>
+        <?php
+        toggleProducts($sandwiches);
+        toggleProducts($drinks);
+        ?>
 
         <button type="submit" class="btn btn-primary">Order!</button>
     </form>
