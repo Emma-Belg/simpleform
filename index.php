@@ -130,8 +130,7 @@ $streetNumberOutput = getStNumber();
 
 function getZip()
 {
-    $zipcode = /*htmlspecialchars(*/
-        $_POST["zipcode"];
+    $zipcode = $_POST["zipcode"];
     $zipArr = array();
     if (isset($zipcode)) {
         if (empty($_POST["zipcode"])) {
@@ -158,25 +157,25 @@ function correctOrder()
 {
     if (!empty($_POST['email']) && !empty($_POST['street']) && !empty($_POST['streetnumber']) && !empty($_POST['city']) && !empty($_POST["zipcode"])) {
         $order = '<div class="alert alert-success">Your order is being processed</div>';
-    }
-    else {
+    } else {
         $order = '<div class="alert alert-danger">please complete the form</div>';
     }
     return $order;
 }
 
-function orderButtons(){
+function orderButtons()
+{
+    //if(isset(correctOrder() == '<div class="alert alert-success">Your order is being processed</div>'))
     if (isset($_POST['order'])) {
         $normalDelivery = date('h:i:s A', strtotime('+ 2 hours'));
-        $deliveryStatement = '<div class="alert alert-success">'."Your order should arrive by " . $normalDelivery . "<br></div>";
+        $deliveryStatement = '<div class="alert alert-success">' . "Your order should arrive by " . $normalDelivery . "<br></div>";
     }
     if (isset($_POST['expressOrder'])) {
         $expressDelivery = date('h:i:s A', strtotime('+ 45 minutes'));
-        $deliveryStatement = '<div class="alert alert-success">'."Your order should arrive by " . $expressDelivery. "<br></div>";
+        $deliveryStatement = '<div class="alert alert-success">' . "Your order should arrive by " . $expressDelivery . "<br></div>";
     }
     return $deliveryStatement;
 }
-
 
 
 /*//NOTE from Sicco
@@ -216,9 +215,23 @@ $drinks = [
     ['name' => 'Ice-tea', 'price' => 3],
 ];
 
-$totalValue = 0;
+if (!empty($_POST["products"])) {
+    $productOrders = $_POST["products"];
+    $totalPrice = array();
 
-if (!isset($_GET["food"])){
+    foreach ($productOrders as $key => $amount) {
+        $prodPrice = $products[$key]['price'];
+        $ThenPrice = $prodPrice * $amount;
+        array_push($totalPrice, $ThenPrice);
+    }
+    $total = array_sum($totalPrice);
+    $totalValue = $total;
+} else {
+    $totalValue = 0;
+}
+
+
+if (!isset($_GET["food"])) {
     $_GET["food"] = 1;
 }
 if ($_GET["food"] == 1) {
