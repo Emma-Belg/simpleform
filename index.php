@@ -197,7 +197,7 @@ function whatIsHappening()
     var_dump($_SESSION);
 }
 
-whatIsHappening();
+//whatIsHappening();
 
 //your products with their price.
 $products = [
@@ -225,7 +225,7 @@ if ($_GET["food"] == 1) {
 }
 
 
-/*function thePrice() {*/
+
     if (!empty($_POST["products"])) {
         $productOrders = $_POST["products"];
         $totalPrice = array();
@@ -237,18 +237,17 @@ if ($_GET["food"] == 1) {
         }
         $total = array_sum($totalPrice);
         $totalValue = $total;
-        setcookie ("priceCookie", strval($totalValue), /*time() + (6000)*/);
-         if(!isset($_COOKIE["priceCookie"])) {
-             $newValue = $totalValue + $_COOKIE["priceCookie"];
-             setcookie ("secondCookie", strval($totalValue + $_COOKIE["priceCookie"]));
+        if(!isset($_COOKIE["priceCookie"])) {
+            setcookie ("priceCookie", strval($totalValue), time() + (6000));
+        } else {
+            $totalValue= $totalValue + $_COOKIE["priceCookie"];
+            setcookie ("priceCookie", strval($totalValue), time() + (6000));
         }
-         //echo $newValue;
-         echo $_COOKIE["priceCookie"];
+         $totalValue = $_COOKIE["priceCookie"];
     } else {
         $totalValue = 0;
     }
-/*    return $totalValue;
-}*/
+
 
 
 
